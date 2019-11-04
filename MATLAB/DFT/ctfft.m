@@ -1,5 +1,5 @@
 function w = ctfft(v)
-
+% Cooley-Turkey FFT
 % v should be a length-N column vector
 N = length(v);
 
