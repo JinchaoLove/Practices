@@ -1,7 +1,7 @@
 function w = radix2fft(v)
+% Decimation-in-time Radix-2-FFT
 
 % v should be a length-N column vector
-
 N = length(v);
 
 if ~isequal(unique(factor(N)),2)
@@ -12,7 +12,6 @@ if N == 2
     % Compute length-2 DFT directly (it's super simple)
     w = [1,1;1,-1] * v;
 else
-
     % Split input vector into even and odd parts
     v_even = v(1:2:end-1);  % note that x(0) is x(1) in matlab
     v_odd = v(2:2:end);
