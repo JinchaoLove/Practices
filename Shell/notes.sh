@@ -20,7 +20,8 @@ name=$1
 tensorboard --logdir=/project_out/cache/models/${name}/tensorboard/ --port=6006
 
 # 查看tensorboard: 127.0.0.1:16006  or localhost:16006/
-ssh -L 16006:127.0.0.1:6006 jinchao@bdda1.itsc.cuhk.edu.hk -tensorboard --logdir=/project_out/cache/models/name/tensorboard/ --port=6006
+ssh -L 16006:127.0.0.1:6006 jinchao@bdda1.itsc.cuhk.edu.hk
+tensorboard --logdir=/project_out/cache/models/name/tensorboard/ --port=6006
 
 # 查看活动详情
 pgrep -a -U jcli
