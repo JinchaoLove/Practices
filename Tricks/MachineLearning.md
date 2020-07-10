@@ -1,4 +1,7 @@
+## Solutions when neural network not working
+
 1. OOM problem
-use fit_generator, use smaller batch_size
+
+use fit_generator or use smaller batch_size
 
 
