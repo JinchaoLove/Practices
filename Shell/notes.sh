@@ -14,6 +14,8 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 tar -zxf *.tar.gz
 # 解压指定目录下所有zip
 find . -name "*.zip" | xargs -n1 unzip
+# 压缩
+tar -zcf *.tar.gz */
 
 # tensorboard
 name=$1
