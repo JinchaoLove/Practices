@@ -4,7 +4,7 @@ bypy info # 按指示进入网站授权
 bypy list  #显示文档
 bypy upload filename   #上传文档
 bypy -c    #取消令牌文件。一段时间后要重新授权
-bypy downdir filename  #下载
+bypy downfile filename  #下载
 
 # Use LibreOffice software to convert ppt* to pdf.
 /Applications/LibreOffice.app/Contents/MacOS/soffice --convert-to pdf *.pptx
