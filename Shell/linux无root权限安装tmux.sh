@@ -7,8 +7,10 @@
 # exit on error
 set -e
  
-TMUX_VERSION=1.8
- 
+TMUX_VERSION=3.1
+LIBEVENT_VERSION=2.1.12-stable
+NCURSES_VERSION=6.2
+
 # create our directories
 mkdir -p $HOME/local $HOME/tmux_tmp
 cd $HOME/tmux_tmp
@@ -16,16 +18,16 @@ cd $HOME/tmux_tmp
 # download source files for tmux, libevent, and ncurses
 wget -O tmux-${TMUX_VERSION}.tar.gz https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
 #http://sourceforge.net/projects/tmux/files/tmux/tmux-${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz/download
-wget https://github.com/downloads/libevent/libevent/libevent-2.0.19-stable.tar.gz
-wget ftp://ftp.gnu.org/gnu/ncurses/ncurses-5.9.tar.gz
- 
+wget https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}/libevent-${LIBEVENT_VERSION}.tar.gz
+wget ftp://ftp.gnu.org/gnu/ncurses/ncurses-${NCURSES_VERSION}.tar.gz
+
 # extract files, configure, and compile
- 
+
 ############
 # libevent #
 ############
-tar xvzf libevent-2.0.19-stable.tar.gz
-cd libevent-2.0.19-stable
+tar xzf libevent-${LIBEVENT_VERSION}tar.gz
+cd libevent-${LIBEVENT_VERSION}
 ./configure --prefix=$HOME/local --disable-shared
 make
 make install
@@ -34,8 +36,8 @@ cd ..
 ############
 # ncurses #
 ############
-tar xvzf ncurses-5.9.tar.gz
-cd ncurses-5.9
+tar xzf ncurses-${NCURSES_VERSION}.tar.gz
+cd ncurses-${NCURSES_VERSION}
 ./configure --prefix=$HOME/local
 make
 make install
@@ -44,22 +46,22 @@ cd ..
 ############
 # tmux #
 ############
-tar xvzf tmux-${TMUX_VERSION}.tar.gz
+tar xzf tmux-${TMUX_VERSION}.tar.gz
 cd tmux-${TMUX_VERSION}
 ./configure CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-L$HOME/local/lib -L$HOME/local/include/ncurses -L$HOME/local/include"
 CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-static -L$HOME/local/include -L$HOME/local/include/ncurses -L$HOME/local/lib" make
 cp tmux $HOME/local/bin
 cd ..
- 
+
 # cleanup
 rm -rf $HOME/tmux_tmp
- 
+
 echo "$HOME/local/bin/tmux is now available. You can optionally add $HOME/local/bin to your PATH."
 
 ############
 # add PATH #
 ############
-# vim ~/.bashrc
+# $ vim ~/.bashrc
 # .bashrc:
 #     export PATH=$PATH:/usr/dev/local/bin
-# source ~/.bashrc
+# $ source ~/.bashrc
